@@ -1,0 +1,22 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    init: true
+    network_mode: bridge
+    ports:
+      - "8082:3000"
+    volumes:
+      - .:/app
+      - node-modules:/app/node_modules
+      - data:/app/data
+    environment:
+      - DB_PATH=/app/data/jobs.db
+      - OPENAPI_PATH=/tmp/job-notifier/openapi.yaml
+      - APP_PORT=3000
+    restart: unless-stopped
+
+volumes:
+  node-modules:
+  data:

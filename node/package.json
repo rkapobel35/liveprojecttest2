@@ -1,0 +1,36 @@
+{
+  "name": "job-notifier-api",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Simple Node.js REST API for job notifications using Express",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon --legacy-watch index.js",
+    "init-db": "node scripts/init-db.js",
+    "openapi": "node scripts/generate-openapi.js",
+    "test": "node --test \"tests/**/*.test.js\""
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "nodemonConfig": {
+    "watch": [
+      "index.js",
+      "config",
+      "src"
+    ],
+    "ext": "js,html,json"
+  },
+  "dependencies": {
+    "better-sqlite3": "13.0.3",
+    "express": "5.3.0",
+    "pino": "10.4.0",
+    "swagger-jsdoc": "6.3.0",
+    "yaml": "2.9.1"
+  },
+  "devDependencies": {
+    "nodemon": "3.1.14"
+  }
+}

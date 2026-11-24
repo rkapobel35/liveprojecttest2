@@ -1,0 +1,15 @@
+.git
+.devin
+.vscode
+.idea
+node_modules
+data
+*.db
+*.db-shm
+*.db-wal
+*.log
+public/openapi.yaml
+.env
+.env.*
+*.pem
+*.key
