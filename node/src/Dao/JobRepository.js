@@ -24,4 +24,10 @@ export default class JobRepository extends IJobRepository {
 
         return Number(result.lastInsertRowid);
     }
+
+    getAll() {
+        const stmt = this.#db.prepare('SELECT id, name, tags, salary, start_hour, end_hour, created_at FROM jobs');
+
+        return stmt.all();
+    }
 }

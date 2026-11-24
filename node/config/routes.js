@@ -3,6 +3,8 @@ import { fileURLToPath } from 'node:url';
 import express from 'express';
 import HomeController from '../src/Controller/HomeController.js';
 import JobController from '../src/Controller/JobController.js';
+import StatsController from '../src/Controller/StatsController.js';
+import ScheduleController from '../src/Controller/ScheduleController.js';
 
 export const OPENAPI_PATH = process.env.OPENAPI_PATH
     || fileURLToPath(new URL('../public/openapi.yaml', import.meta.url));
@@ -30,4 +32,10 @@ export default function (app, container) {
         express.text({ type: () => true }),
         (request, response) => container.get(JobController).createJob(request, response)
     );
+
+    // API endpoint for job salary/tag statistics
+    app.get('/api/jobs/stats', (request, response) => container.get(StatsController).getStats(request, response));
+
+    // API endpoint for max non-overlapping notification-window schedule
+    app.get('/api/jobs/schedule', (request, response) => container.get(ScheduleController).getSchedule(request, response));
 }

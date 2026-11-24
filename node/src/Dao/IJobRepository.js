@@ -7,4 +7,9 @@ export default class IJobRepository {
     createJob(job) {
         throw new Error('Not implemented');
     }
+
+    /** @returns {Array<Record<string, any>>} */
+    getAll() {
+        throw new Error('Not implemented');
+    }
 }

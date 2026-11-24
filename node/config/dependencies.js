@@ -6,8 +6,12 @@ import IJobRepository from '../src/Dao/IJobRepository.js';
 import PersonRepository from '../src/Dao/PersonRepository.js';
 import IPersonRepository from '../src/Dao/IPersonRepository.js';
 import JobService from '../src/Service/JobService.js';
+import SalaryStatsService from '../src/Service/SalaryStatsService.js';
+import ScheduleService from '../src/Service/ScheduleService.js';
 import HomeController from '../src/Controller/HomeController.js';
 import JobController from '../src/Controller/JobController.js';
+import StatsController from '../src/Controller/StatsController.js';
+import ScheduleController from '../src/Controller/ScheduleController.js';
 import IMailSender from '../src/Service/IMailSender.js';
 import MailSender from '../src/Service/MailSender.js';
 import ISmsSender from '../src/Service/ISmsSender.js';
@@ -55,5 +59,21 @@ export default function (container) {
 
     container.set(HomeController, () => {
         return new HomeController();
+    });
+
+    container.set(SalaryStatsService, () => {
+        return new SalaryStatsService();
+    });
+
+    container.set(StatsController, (c) => {
+        return new StatsController(c.get(IJobRepository), c.get(SalaryStatsService));
+    });
+
+    container.set(ScheduleService, () => {
+        return new ScheduleService();
+    });
+
+    container.set(ScheduleController, (c) => {
+        return new ScheduleController(c.get(IJobRepository), c.get(ScheduleService));
     });
 }
